@@ -17,4 +17,5 @@ async def ping(ctx):
 async def limpar(ctx, quantidade: int):
     await ctx.channel.purge(limit=quantidade)
 import os
+print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
