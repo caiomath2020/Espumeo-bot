@@ -26,7 +26,7 @@ async def on_message(message):
 
     spam_tracker[user].append((message, now))
 
-    spam_tracker[user] = [(msg, t) for msg, t in spam_tracker[user] if now - t < 5]
+    spam_tracker[user] = [(msg, t) for msg, t in spam_tracker[user] if now - t < 7]
 
     if len(spam_tracker[user]) >= 5:
         for msg, _ in spam_tracker[user]:
@@ -53,4 +53,5 @@ async def limpar(ctx, quantidade: int):
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
+
 
