@@ -23,7 +23,8 @@ async def on_message(message):
     if user not in spam_tracker:
         spam_tracker[user] = []
 
-    spam_tracker[user].append((message, now))  # guarda a mensagem e o tempo
+    # guarda a mensagem e o tempo
+    spam_tracker[user].append((message, now))
 
     # manter apenas mensagens dos últimos 5 segundos
     spam_tracker[user] = [(msg, t) for msg, t in spam_tracker[user] if now - t < 5]
@@ -39,8 +40,9 @@ async def on_message(message):
                 pass
         await message.channel.send(f"{message.author.mention} pare de spammar.")
         spam_tracker[user].clear()
-        return
+        return  # importante: evita processar comandos duplicados
 
+    # processa comandos normalmente
     await bot.process_commands(message)
 
 @bot.command()
