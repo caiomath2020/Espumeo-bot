@@ -15,25 +15,18 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.author.bot:
-        return  # ignora bots
+        return
 
-    # ⚡ Processa comandos primeiro para evitar respostas duplicadas
-    await bot.process_commands(message)
-
-    # ----- Lógica de anti-spam -----
     user = message.author.id
     now = time.time()
 
     if user not in spam_tracker:
         spam_tracker[user] = []
 
-    # guarda a mensagem e o horário
     spam_tracker[user].append((message, now))
 
-    # mantém apenas mensagens dos últimos 5 segundos
     spam_tracker[user] = [(msg, t) for msg, t in spam_tracker[user] if now - t < 5]
 
-    # se enviar 5 ou mais mensagens nesse período, apaga todas
     if len(spam_tracker[user]) >= 5:
         for msg, _ in spam_tracker[user]:
             try:
@@ -41,12 +34,13 @@ async def on_message(message):
             except discord.Forbidden:
                 print(f"Não consegui apagar mensagem de {message.author}")
             except discord.NotFound:
-                pass  # mensagem já apagada
+                pass
         await message.channel.send(f"{message.author.mention} pare de spammar.")
         spam_tracker[user].clear()
-        return  # evita processar comandos novamente
+        return
 
-# ----- Comandos -----
+    await bot.process_commands(message)
+
 @bot.command()
 async def ping(ctx):
     await ctx.send("Pong!")
