@@ -36,7 +36,7 @@ async def on_message(message):
                 print(f"Não consegui apagar mensagem de {message.author}")
             except discord.NotFound:
                 pass
-        await message.channel.send(f"{message.author.mention} pare de spammar.")
+        await message.channel.send(f"{message.author.mention} PARA DE SPAMMAR DOENTE")
         spam_tracker[user].clear()
         return
 
@@ -53,6 +53,7 @@ async def limpar(ctx, quantidade: int):
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
+
 
 
 
