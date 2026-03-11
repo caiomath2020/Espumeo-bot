@@ -87,12 +87,12 @@ async def serverinfo(ctx):
     embed.add_field(name="Cargos", value=total_cargos, inline=True)
     embed.add_field(name="Servidor criado em", value=criacao, inline=False)
 
-    await ctx.send(embed=embed)
-
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
 intents.members = True
+
+    await ctx.send(embed=embed)
 
 import os
 print(os.getenv("TOKEN"))
