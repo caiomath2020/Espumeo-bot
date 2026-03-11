@@ -50,9 +50,25 @@ async def ping(ctx):
 async def limpar(ctx, quantidade: int):
     await ctx.channel.purge(limit=quantidade)
 
+@bot.command()
+async def userinfo(ctx, member: discord.Member = None):
+    member = member or ctx.author  # se não mencionar, pega quem chamou o comando
+
+    embed = discord.Embed(title=f"Informações de {member}", color=0x00ff00)
+    embed.set_thumbnail(url=member.avatar.url if member.avatar else None)
+    embed.add_field(name="ID", value=member.id, inline=True)
+    embed.add_field(name="Status", value=str(member.status).title(), inline=True)
+    embed.add_field(name="Top Role", value=member.top_role, inline=True)
+    embed.add_field(name="Cargos", value=", ".join([role.name for role in member.roles if role.name != "@everyone"]), inline=False)
+    embed.add_field(name="Entrou no servidor", value=member.joined_at.strftime("%d/%m/%Y %H:%M"), inline=True)
+    embed.add_field(name="Conta criada em", value=member.created_at.strftime("%d/%m/%Y %H:%M"), inline=True)
+
+    await ctx.send(embed=embed)
+
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
+
 
 
 
