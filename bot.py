@@ -69,7 +69,7 @@ async def userinfo(ctx, member: discord.Member = None):
 async def serverinfo(ctx):
     guild = ctx.guild
 
-    membros = []
+    membros = [guild.members]
     async for m in guild.fetch_members(limit=None):
         membros.append(m)
 
@@ -99,4 +99,3 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
-
