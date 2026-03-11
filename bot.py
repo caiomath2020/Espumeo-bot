@@ -69,7 +69,7 @@ async def userinfo(ctx, member: discord.Member = None):
 async def serverinfo(ctx):
     guild = ctx.guild
 
-    membros = await guild.fetch_members(limit=None).flatten()
+    membros = async for m in guild.fetch_members(limit=None)
     total_membros = len(membros)
 
     online = len([m for m in membros if m.status != discord.Status.offline])
@@ -97,5 +97,6 @@ intents.members = True
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
+
 
 
