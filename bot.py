@@ -94,7 +94,9 @@ intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
 intents.members = True
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
+
