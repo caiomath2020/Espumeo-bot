@@ -92,8 +92,9 @@ intents.messages = True
 intents.message_content = True
 intents.members = True
 
-    await ctx.send(embed=embed)
+     await ctx.send(embed=embed)
 
 import os
 print(os.getenv("TOKEN"))
 bot.run(os.getenv("TOKEN"))
+
